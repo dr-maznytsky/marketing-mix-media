@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маркетинг мікс в промоції медіапродуктів</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background: #f8f9fa;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .nav-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .nav-btn:hover, .nav-btn.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin: 25px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateX(5px);
+        }
+        
+        .quiz-container {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .quiz-question {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .quiz-option {
+            display: block;
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quiz-option:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+            transform: translateX(5px);
+        }
+        
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .check-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .check-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        .result {
+            display: none;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .result.show {
+            display: block;
+            animation: slideIn 0.5s;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .model-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .model-steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .model-step {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .interactive-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .interactive-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .interactive-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .interactive-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin: 10px 0;
+        }
+        
+        .progress-bar {
+            height: 5px;
+            background: #e9ecef;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>🎬 Маркетинг мікс в промоції медіапродуктів</h1>
+            <p>Інтерактивне заняття для студентів журналістики</p>
+        </header>
+        
+        <nav>
+            <button class="nav-btn active" onclick="showSection('intro')">Вступ</button>
+            <button class="nav-btn" onclick="showSection('section1')">Типологія каналів</button>
+            <button class="nav-btn" onclick="showSection('section2')">Цифрові інструменти</button>
+            <button class="nav-btn" onclick="showSection('section3')">Класичні канали</button>
+            <button class="nav-btn" onclick="showSection('section4')">Фреймворки</button>
+            <button class="nav-btn" onclick="showSection('quiz')">Перевірка знань</button>
+        </nav>
+        
+        <div class="content">
+            <!-- Вступ -->
+            <div class="section active" id="intro">
+                <h2>📚 Про курс</h2>
+                
+                <div class="card">
+                    <h3>Мета заняття</h3>
+                    <p>Структурувати уявлення студентів про можливі канали промоції медіапродуктів та інструменти в цих каналах.</p>
+                </div>
+                
+                <div class="model-box">
+                    <h3>🎯 Модель Гарольда Лассвелла</h3>
+                    <p>П'ять ключових питань комунікації:</p>
+                    <div class="model-steps">
+                        <div class="model-step">
+                            <h4>Хто каже?</h4>
+                            <p>Комунікатор</p>
+                        </div>
+                        <div class="model-step">
+                            <h4>Що каже?</h4>
+                            <p>Повідомлення</p>
+                        </div>
+                        <div class="model-step">
+                            <h4>Як каже?</h4>
+                            <p>Канал</p>
+                        </div>
+                        <div class="model-step">
+                            <h4>Кому каже?</h4>
+                            <p>Аудиторія</p>
+                        </div>
+                        <div class="model-step">
+                            <h4>З яким ефектом?</h4>
+                            <p>Результат</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>💡 Ключова теза:</strong> Успішна промоція медіапродукту вимагає узгодженості всіх п'яти елементів моделі Лассвелла.
+                </div>
+            </div>
+            
+            <!-- Розділ 1 -->
+            <div class="section" id="section1">
+                <h2>📊 Типологія каналів цифрових комунікацій</h2>
+                
+                <div class="card">
+                    <h3>Модель PESO</h3>
+                    <p>Чотири типи каналів комунікації для просування медіапродуктів:</p>
+                    
+                    <table class="interactive-table">
+                        <tr>
+                            <th>Тип каналу</th>
+                            <th>Характеристики</th>
+                            <th>Приклади</th>
+                        </tr>
+                        <tr>
+                            <td><strong>P – Paid (Оплачувані)</strong></td>
+                            <td>Гарантоване охоплення, точний контроль</td>
+                            <td>Контекстна реклама, банери, спонсорство</td>
+                        </tr>
+                        <tr>
+                            <td><strong>E – Earned (Зароблені)</strong></td>
+                            <td>Висока довіра, широке охоплення</td>
+                            <td>ЗМІ, прес-релізи, журналістські огляди</td>
+                        </tr>
+                        <tr>
+                            <td><strong>S – Shared (Спільні)</strong></td>
+                            <td>Вірусний потенціал, інтерактивність</td>
+                            <td>Facebook, Instagram, TikTok, YouTube</td>
+                        </tr>
+                        <tr>
+                            <td><strong>O – Owned (Власні)</strong></td>
+                            <td>Повний контроль, прямий доступ</td>
+                            <td>Власний сайт, блог, подкаст, додаток</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="info-box">
+                    <strong>📈 Статистика:</strong> Відео складає 82% всього інтернет-трафіка (Cisco, 2022). Це підкреслює важливість відеоформатів у промоції медіапродуктів.
+                </div>
+                
+                <div class="card">
+                    <h3>💼 Практичне завдання</h3>
+                    <p>Оберіть медіапродукт (фільм, подкаст, блог) та визначте, які канали з моделі PESO будуть найефективнішими для його промоції. Обґрунтуйте свій вибір.</p>
+                </div>
+            </div>
+            
+            <!-- Розділ 2 -->
+            <div class="section" id="section2">
+                <h2>💻 Цифрові інструменти маркетингу</h2>
+                
+                <div class="card">
+                    <h3>SEO та контекстна реклама</h3>
+                    <p><strong>SEO (Search Engine Optimization)</strong> – оптимізація для пошукових систем:</p>
+                    <ul>
+                        <li><strong>Внутрішня SEO:</strong> ключові слова, структура сайту, технічна оптимізація</li>
+                        <li><strong>Зовнішня SEO:</strong> зворотні посилання, авторитетність ресурсу</li>
+                    </ul>
+                    <p><strong>Контекстна реклама:</strong> швидке досягнення топ-позицій, модель оплати CPC (Cost Per Click)</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Social Media Marketing (SMM)</h3>
+                    
+                    <table class="interactive-table">
+                        <tr>
+                            <th>Платформа</th>
+                            <th>Особливості</th>
+                            <th>Цільова аудиторія</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Facebook</strong></td>
+                            <td>Детальний контент, спільноти</td>
+                            <td>25+ років</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Instagram</strong></td>
+                            <td>Візуальний контент, Stories</td>
+                            <td>18-35 років</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TikTok</strong></td>
+                            <td>Короткі вірусні відео</td>
+                            <td>16-30 років</td>
+                        </tr>
+                        <tr>
+                            <td><strong>YouTube</strong></td>
+                            <td>Відео різної тривалості</td>
+                            <td>Універсальна</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="card">
+                    <h3>Інфлюенсер-маркетинг</h3>
+                    
+                    <table class="interactive-table">
+                        <tr>
+                            <th>Тип інфлюенсера</th>
+                            <th>Підписників</th>
+                            <th>Переваги</th>
+                        </tr>
+                        <tr>
+                            <td>Наноінфлюенсери</td>
+                            <td>1-10 тис.</td>
+                            <td>Максимальна довіра, низька вартість</td>
+                        </tr>
+                        <tr>
+                            <td>Мікроінфлюенсери</td>
+                            <td>10-100 тис.</td>
+                            <td>Висока залученість, експертність</td>
+                        </tr>
+                        <tr>
+                            <td>Макроінфлюенсери</td>
+                            <td>100 тис. - 1 млн</td>
+                            <td>Баланс охоплення та довіри</td>
+                        </tr>
+                        <tr>
+                            <td>Мегаінфлюенсери</td>
+                            <td>1+ млн</td>
+                            <td>Максимальне охоплення</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>💰 ROI Email-маркетингу:</strong> До 4200% – це означає 42 долари доходу на кожен долар витрат!
+                </div>
+            </div>
+            
+            <!-- Розділ 3 -->
+            <div class="section" id="section3">
+                <h2>📰 Класичні канали просування</h2>
+                
+                <div class="info-box">
+                    <strong>🎯 Чому класичні канали актуальні?</strong> Споживачі, що взаємодіяли з брендом через традиційні канали, на 70% частіше здійснюють покупку (Nielsen).
+                </div>
+                
+                <div class="card">
+                    <h3>Традиційні масмедіа</h3>
+                    <ul>
+                        <li><strong>Преса:</strong> ексклюзивна інформація, експертні коментарі</li>
+                        <li><strong>Радіо:</strong> інтимна атмосфера, супроводження протягом дня</li>
+                        <li><strong>Телебачення:</strong> мільйонні охоплення, візуальна демонстрація</li>
+                    </ul>
+                    <p><strong>Інструменти:</strong> прес-релізи, прес-конференції, медіатури, брифінги</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Друковані матеріали</h3>
+                    <p><strong>Переваги:</strong></p>
+                    <ul>
+                        <li>На 70% краще запам'ятовування інформації</li>
+                        <li>Тактильний досвід та колекційна цінність</li>
+                        <li>Відсутність цифрових відволікань</li>
+                    </ul>
+                    <p><strong>Формати:</strong> корпоративні журнали, ньюслетери, річні звіти, сувенірна продукція</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Офлайн-івенти</h3>
+                    <p><strong>Статистика Event Marketing Institute:</strong></p>
+                    <ul>
+                        <li>84% споживачів більш схильні до покупки після івенту</li>
+                        <li>74% формують позитивніше ставлення до бренду</li>
+                    </ul>
+                    <p><strong>Типи заходів:</strong> прес-конференції, виставки, фестивалі, благодійні акції, церемонії</p>
+                </div>
+            </div>
+            
+            <!-- Розділ 4 -->
+            <div class="section" id="section4">
+                <h2>🎯 Фреймворки розробки промо-кампаній</h2>
+                
+                <div class="highlight-box">
+                    <strong>📊 McKinsey дослідження:</strong> Компанії з структурованими фреймворками мають на 67% вищу ефективність промоційних витрат.
+                </div>
+                
+                <div class="card">
+                    <h3>Фреймворк А: Планування діяльності</h3>
+                    <ol>
+                        <li><strong>Медіаплан</strong> – структурування активностей у часі</li>
+                        <li><strong>Вибір інструментів</strong> – відповідність аудиторії та продукту</li>
+                        <li><strong>Контент-стратегія</strong> – систематизація генерування контенту</li>
+                        <li><strong>KPI</strong> – вимірювання ефективності (SMART-цілі)</li>
+                    </ol>
+                    
+                    <div class="model-box">
+                        <h4>SMART-формула цілей</h4>
+                        <div class="model-steps">
+                            <div class="model-step">S<br>Конкретні</div>
+                            <div class="model-step">M<br>Вимірювані</div>
+                            <div class="model-step">A<br>Досяжні</div>
+                            <div class="model-step">R<br>Релевантні</div>
+                            <div class="model-step">T<br>Обмежені в часі</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Фреймворк Б: Воронка комунікацій (AIDA)</h3>
+                    
+                    <table class="interactive-table">
+                        <tr>
+                            <th>Етап</th>
+                            <th>Завдання</th>
+                            <th>Канали</th>
+                        </tr>
+                        <tr>
+                            <td><strong>A – Attention (Увага)</strong></td>
+                            <td>Яскраві повідомлення, провокація</td>
+                            <td>Соціальні мережі, зовнішня реклама</td>
+                        </tr>
+                        <tr>
+                            <td><strong>I – Interest (Інтерес)</strong></td>
+                            <td>Трейлери, інтерв'ю, деталі</td>
+                            <td>Спеціалізовані медіа, YouTube</td>
+                        </tr>
+                        <tr>
+                            <td><strong>D – Desire (Бажання)</strong></td>
+                            <td>Емоції, соціальні докази</td>
+                            <td>Інфлюенсери, відгуки</td>
+                        </tr>
+                        <tr>
+                            <td><strong>A – Action (Дія)</strong></td>
+                            <td>Зручний доступ, CTA</td>
+                            <td>Прямі посилання, платформи</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="info-box">
+                    <strong>🔄 Customer Journey:</strong> Споживач взаємодіє з брендом через 6-8 каналів перед прийняттям рішення (Salesforce).
+                </div>
+            </div>
+            
+            <!-- Квіз -->
+            <div class="section" id="quiz">
+                <h2>✅ Перевірка знань</h2>
+                
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <h3>Питання 1: Модель Лассвелла</h3>
+                        <p>Який елемент моделі Лассвелла відповідає за вибір каналів комунікації?</p>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="a"> Хто каже?
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="b"> Що каже?
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="c"> Як каже?
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="d"> Кому каже?
+                        </label>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>Питання 2: Модель PESO</h3>
+                        <p>Який тип каналів надає найбільший контроль над контентом?</p>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="a"> Paid (Оплачувані)
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="b"> Earned (Зароблені)
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="c"> Shared (Спільні)
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="d"> Owned (Власні)
+                        </label>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>Питання 3: Інфлюенсер-маркетинг</h3>
+                        <p>Який тип інфлюенсерів має найвищий рівень довіри аудиторії?</p>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="a"> Мегаінфлюенсери (1+ млн)
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="b"> Макроінфлюенсери (100 тис. - 1 млн)
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="c"> Мікроінфлюенсери (10-100 тис.)
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="d"> Наноінфлюенсери (1-10 тис.)
+                        </label>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>Питання 4: AIDA модель</h3>
+                        <p>На якому етапі воронки AIDA найефективніші соціальні мережі?</p>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="a"> Attention (Увага)
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="b"> Interest (Інтерес)
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="c"> Desire (Бажання)
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="d"> Action (Дія)
+                        </label>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <h3>Питання 5: Статистика</h3>
+                        <p>Який відсоток інтернет-трафіку складає відео за даними Cisco?</p>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="a"> 52%
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="b"> 67%
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="c"> 82%
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="d"> 95%
+                        </label>
+                    </div>
+                    
+                    <button class="check-btn" onclick="checkQuiz()">Перевірити відповіді</button>
+                    
+                    <div class="result" id="quizResult"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const answers = {
+            q1: 'c',
+            q2: 'd',
+            q3: 'd',
+            q4: 'a',
+            q5: 'c'
+        };
+        
+        function showSection(sectionId) {
+            //Ховаємо всі секції
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Показуємо обрану секцію
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Оновлюємо кнопки навігації
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Оновлюємо прогрес
+            updateProgress();
+            
+            // Скролимо вгору
+            window.scrollTo(0, 0);
+        }
+        
+        function updateProgress() {
+            const sections = ['intro', 'section1', 'section2', 'section3', 'section4', 'quiz'];
+            const currentSection = document.querySelector('.section.active').id;
+            const currentIndex = sections.indexOf(currentSection);
+            const progress = ((currentIndex + 1) / sections.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+        
+        function checkQuiz() {
+            let score = 0;
+            const total = Object.keys(answers).length;
+            
+            // Перевіряємо кожне питання
+            Object.keys(answers).forEach(question => {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                const options = document.querySelectorAll(`input[name="${question}"]`);
+                
+                options.forEach(option => {
+                    const label = option.parentElement;
+                    label.classList.remove('correct', 'incorrect');
+                    
+                    if (option.value === answers[question]) {
+                        label.classList.add('correct');
+                    }
+                    
+                    if (selected && option === selected && option.value !== answers[question]) {
+                        label.classList.add('incorrect');
+                    }
+                });
+                
+                if (selected && selected.value === answers[question]) {
+                    score++;
+                }
+            });
+            
+            // Показуємо результат
+            const resultDiv = document.getElementById('quizResult');
+            const percentage = (score / total) * 100;
+            
+            let resultClass = '';
+            let resultMessage = '';
+            
+            if (percentage >= 80) {
+                resultClass = 'correct';
+                resultMessage = `🎉 Відмінно! Ви відповіли правильно на ${score} з ${total} питань (${percentage}%)`;
+            } else if (percentage >= 60) {
+                resultClass = 'incorrect';
+                resultMessage = `👍 Добре! Ви відповіли правильно на ${score} з ${total} питань (${percentage}%). Але є над чим попрацювати.`;
+            } else {
+                resultClass = 'incorrect';
+                resultMessage = `📚 Потрібно попрацювати! Ви відповіли правильно на ${score} з ${total} питань (${percentage}%). Перегляньте матеріали ще раз.`;
+            }
+            
+            resultDiv.className = `result show ${resultClass}`;
+            resultDiv.innerHTML = resultMessage;
+        }
+        
+        // Ініціалізація прогресу
+        updateProgress();
+    </script>
+</body>
+</html>
